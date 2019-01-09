@@ -1,11 +1,11 @@
 package DominAtions;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
 	
@@ -18,8 +18,27 @@ public class Game {
 		this.joueurs = new Joueur[this.nbrJoueur];
 		
 		this.listDominos = this.readCsvDomino();
-		
 		this.printDominosList();
+		
+		this.initJoueurs();
+	}
+	
+	public void initJoueurs() {
+		int nbRois;
+		if(this.nbrJoueur == 2) {
+			nbRois = 2;
+		} else {
+			nbRois = 1;
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		for(int i = 0; i < this.nbrJoueur; i++) {
+			System.out.println("Joueur " + i+1 + ", quel est votre nom ?");
+			String name = sc.nextLine();
+			
+			this.joueurs[i] = new Joueur(name, nbRois);
+		}
+		sc.close();
 	}
 	
 	public void printDominosList() {
