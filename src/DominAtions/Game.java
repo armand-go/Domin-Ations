@@ -31,14 +31,13 @@ public class Game {
 			nbRois = 1;
 		}
 		
-		Scanner sc = new Scanner(System.in);
 		for(int i = 0; i < this.nbrJoueur; i++) {
-			System.out.println("Joueur " + i+1 + ", quel est votre nom ?");
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Joueur " + (i+1) + ", quel est votre nom ?");
 			String name = sc.nextLine();
 			
-			this.joueurs[i] = new Joueur(name, nbRois);
+			this.joueurs[i] = new Joueur(name, nbRois, i);
 		}
-		sc.close();
 	}
 	
 	public void printDominosList() {

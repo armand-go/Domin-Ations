@@ -30,9 +30,6 @@ public class Menu {
 		
 		System.out.println("C'est parti pour un mode " + nbr + " Joueurs");
 		
-		if(sc!=null)
-	        sc.close();
-		
 		return nbr;
 	}
 }

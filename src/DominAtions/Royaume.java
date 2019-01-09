@@ -4,9 +4,9 @@ public class Royaume {
 	
 	int X = 9;
 	int Y = 9;
-	Terrain[][] terrains;
+	Terrain[][] terrain;
 	
 	public Royaume() {
-		this.terrains = new Terrain[X][Y];
+		this.terrain = new Terrain[X][Y];
 	}
 }
