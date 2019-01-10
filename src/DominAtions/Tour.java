@@ -3,6 +3,8 @@ package DominAtions;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.JFrame;
+
 public class Tour {
 
 	int nbDomino;
@@ -13,7 +15,9 @@ public class Tour {
 	ArrayList<Domino> pioche;
 	ArrayList<Domino> pioche2;
 	
-	public Tour(int nbD, Joueur[] j, ArrayList<Domino> dominos) {
+	JFrame fenetre;
+	
+	public Tour(int nbD, Joueur[] j, ArrayList<Domino> dominos, JFrame fen) {
 		
 		this.nbDomino = nbD;
 		this.joueurs = j;
@@ -22,6 +26,7 @@ public class Tour {
 		this.ordreJoueurs = this.firstOrder();
 		this.pioche = this.piocher();
 		this.pioche2 = this.piocher();
+		this.fenetre = fen;
 		
 		this.firstTurn();
 	}
@@ -66,7 +71,6 @@ public class Tour {
 		
 		this.ordreJoueurs = dominoChoisi;
 	}
-	
 	
 	public ArrayList<Domino> piocher(){
 		ArrayList<Domino> pioche = new ArrayList<Domino>();

@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 public class Menu {
 
 	int nbrJoueur;
+	JFrame fenetre;
 	
 	public Menu() {
 		//this.nbrJoueur = this.choixNbJoueur();
@@ -24,18 +25,18 @@ public class Menu {
 	}
 	
 	public void show() {
-	    JFrame fenetre = new JFrame();
-	    fenetre.setTitle("Domi'Nations");
-	    fenetre.setSize(400, 100);
-	    fenetre.setLocationRelativeTo(null);
-	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+	    this.fenetre = new JFrame();
+	    this.fenetre.setTitle("Domi'Nations");
+	    this.fenetre.setSize(400, 100);
+	    this.fenetre.setLocationRelativeTo(null);
+	    this.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 	    
-	    fenetre.setLayout(new GridBagLayout());
+	    this.fenetre.setLayout(new GridBagLayout());
 	    GridBagConstraints c = new GridBagConstraints();
 	    
 	    c.gridx = 1;
 	    c.gridy = 0;
-	    fenetre.add(new JLabel("Domi'Nations"), c);
+	    this.fenetre.add(new JLabel("Domi'Nations"), c);
 	    
 		JButton button2, button3, button4;
 		button2 = new JButton("2 Joueurs");
@@ -45,19 +46,19 @@ public class Menu {
 	    c.ipady = -2;
 	    c.gridx = 0;
 	    c.gridy = 1;
-	    fenetre.add(button2, c);
+	    this.fenetre.add(button2, c);
 	    c.gridx = 1;
 	    c.gridy = 1;
-	    fenetre.add(button3, c);
+	    this.fenetre.add(button3, c);
 	    c.gridx = 2;
 	    c.gridy = 1;
-	    fenetre.add(button4, c);	 
+	    this.fenetre.add(button4, c);	 
 	    
 	    button2.addActionListener(new buttonChoix(this, 2));
 	    button3.addActionListener(new buttonChoix(this, 3));
 	    button4.addActionListener(new buttonChoix(this, 4));
 	    
-	    fenetre.setVisible(true);    
+	    this.fenetre.setVisible(true);    
 	}
 	
 	class buttonChoix implements ActionListener {
@@ -73,14 +74,13 @@ public class Menu {
 		
 		public void actionPerformed(ActionEvent e) {
 			this.menu.setNbrJoueur(this.nbr);
-			System.out.println(this.menu.nbrJoueur);
+			//System.out.println(this.menu.nbrJoueur);
 			
-			Game partie = new Game(this.menu.nbrJoueur);
-			partie.begin();
+			Game partie = new Game(this.menu.nbrJoueur, this.menu.fenetre);
 		}
 	}
 
-	public int choixNbJoueur() {
+	/*public int choixNbJoueur() {
 		System.out.println("DOMINATION");
 		System.out.println("Vous pouvez jouer à 2, 3 ou 4 joueurs\n\n");
 		Scanner sc = new Scanner(System.in);
@@ -97,5 +97,5 @@ public class Menu {
 		System.out.println("C'est parti pour un mode " + nbr + " Joueurs");
 		
 		return nbr;
-	}
+	}*/
 }

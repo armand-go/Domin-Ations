@@ -1,26 +1,93 @@
 package DominAtions;
 
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import DominAtions.Menu.buttonChoix;
 
 public class Game {
 	
 	private int nbrJoueur;
 	private Joueur joueurs[];
 	private ArrayList<Domino> listDominos;
+	
+	JFrame fenetre;
+	HashMap<String, JTextField> texts;
 
-	public Game(int nbrJoueur) {
+	public Game(int nbrJoueur, JFrame fenetre) {
 		this.nbrJoueur = nbrJoueur;
 		this.joueurs = new Joueur[this.nbrJoueur];
 		
 		this.listDominos = this.readCsvDomino();
 		
-		this.initJoueurs();
+		this.fenetre = fenetre;
+		
+		this.initFrame();
+	}
+	
+	public void initFrame() {
+		this.fenetre.getContentPane().removeAll();
+		this.fenetre.repaint();
+		
+		this.fenetre.setSize(400, this.nbrJoueur * 100); 
+	    
+	    this.fenetre.setLayout(new GridBagLayout());
+	    GridBagConstraints c = new GridBagConstraints();
+	    c.ipadx = 0;
+	    c.ipady = 0;
+	    
+	    this.texts = new HashMap();
+	    int i = 0;
+	    for(; i < this.nbrJoueur; i++) {
+	    		c.gridx = 0;
+	    		c.gridy = i;
+	    		this.fenetre.add(new JLabel("Joueur " + (1+i) +", quel est votre nom : "), c);
+	    		c.gridx = 1;
+	    		JTextField nom = new JTextField();
+	    		nom.setPreferredSize( new Dimension( 200, 24 ) );
+	    		this.texts.put("nom" + i, nom);
+	    		this.fenetre.add(nom, c);
+	    }
+	    
+	    c.gridx = 1;
+	    c.gridy = i + 2;
+	    
+	    JButton buttonSubmit;
+		buttonSubmit = new JButton("Valider");
+		this.fenetre.add(buttonSubmit, c);
+		buttonSubmit.addActionListener(new buttonSubmit(this));
+		
+	}
+	
+	class buttonSubmit implements ActionListener {
+		
+		Game g;
+		
+		public buttonSubmit(Game g) {
+			super();
+			this.g = g;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			this.g.initJoueurs();
+		}
 	}
 	
 	public void begin() {
@@ -31,11 +98,10 @@ public class Game {
 			nbDom = 4;
 		}
 
-		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos);
+		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos, this.fenetre);
 		while( (this.listDominos.size() != 0) ? true : false) {
 			turn.newTurn();
 		}
-
 	}
 	
 	
@@ -48,12 +114,12 @@ public class Game {
 		}
 		
 		for(int i = 0; i < this.nbrJoueur; i++) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Joueur " + (i+1) + ", quel est votre nom ?");
-			String name = sc.nextLine();
-			
+			String name = this.texts.get("nom" + i).getText();
 			this.joueurs[i] = new Joueur(name, nbRois, i);
+			System.out.println("Joueur Créé");
 		}
+		
+		this.begin();
 	}
 	
 	public void printDominosList() {
@@ -120,4 +186,5 @@ public class Game {
 	
 		return choixDomino(allDominos);
 	}
+
 }
