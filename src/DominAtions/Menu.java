@@ -3,6 +3,8 @@ package DominAtions;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -17,6 +19,10 @@ public class Menu {
 		//this.nbrJoueur = this.choixNbJoueur();
 	}
 	
+	public void setNbrJoueur(int n) {
+		this.nbrJoueur = n;
+	}
+	
 	public void show() {
 	    JFrame fenetre = new JFrame();
 	    fenetre.setTitle("Domi'Nations");
@@ -26,8 +32,6 @@ public class Menu {
 	    
 	    fenetre.setLayout(new GridBagLayout());
 	    GridBagConstraints c = new GridBagConstraints();
-	    c.ipadx = -2;
-	    c.ipady = -2;
 	    
 	    c.gridx = 1;
 	    c.gridy = 0;
@@ -37,7 +41,8 @@ public class Menu {
 		button2 = new JButton("2 Joueurs");
 		button3 = new JButton("3 Joueurs");
 		button4 = new JButton("4 Joueurs");
-		
+	    c.ipadx = -2;
+	    c.ipady = -2;
 	    c.gridx = 0;
 	    c.gridy = 1;
 	    fenetre.add(button2, c);
@@ -46,11 +51,35 @@ public class Menu {
 	    fenetre.add(button3, c);
 	    c.gridx = 2;
 	    c.gridy = 1;
-	    fenetre.add(button4, c);
+	    fenetre.add(button4, c);	 
 	    
-	    fenetre.setVisible(true);
+	    button2.addActionListener(new buttonChoix(this, 2));
+	    button3.addActionListener(new buttonChoix(this, 3));
+	    button4.addActionListener(new buttonChoix(this, 4));
+	    
+	    fenetre.setVisible(true);    
 	}
 	
+	class buttonChoix implements ActionListener {
+	
+		Menu menu;
+		int nbr;
+		
+		public buttonChoix(Menu menu, int nbr) {
+			super();
+			this.menu = menu;
+			this.nbr = nbr;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			this.menu.setNbrJoueur(this.nbr);
+			System.out.println(this.menu.nbrJoueur);
+			
+			Game partie = new Game(this.menu.nbrJoueur);
+			partie.begin();
+		}
+	}
+
 	public int choixNbJoueur() {
 		System.out.println("DOMINATION");
 		System.out.println("Vous pouvez jouer à 2, 3 ou 4 joueurs\n\n");
