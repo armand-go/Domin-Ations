@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Game {
@@ -18,10 +19,25 @@ public class Game {
 		this.joueurs = new Joueur[this.nbrJoueur];
 		
 		this.listDominos = this.readCsvDomino();
-		this.printDominosList();
 		
 		this.initJoueurs();
 	}
+	
+	public void begin() {
+		int nbDom;
+		if(this.nbrJoueur == 3) {
+			nbDom = 3;
+		} else {
+			nbDom = 4;
+		}
+
+		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos);
+		while( (this.listDominos.size() != 0) ? true : false) {
+			turn.newTurn();
+		}
+
+	}
+	
 	
 	public void initJoueurs() {
 		int nbRois;
@@ -50,23 +66,22 @@ public class Game {
 		int nbrRetire = 0;
 		
 		switch(this.nbrJoueur) {
-			case 2:
-				nbrRetire = 24;
-				break;
 			case 3:
 				nbrRetire = 12;
 				break;
 			case 4:
 				break;
 			default:
+				nbrRetire = 24;
 				break;
 		}
 		
 		for(int i = 0; i < nbrRetire; i++) {
-			int randomIndex = (int)((Math.random()*10));
+			int randomIndex = (int)((Math.random() * allDominos.size()));
 			allDominos.remove(randomIndex);
 		}
 		
+		Collections.shuffle(allDominos);
 		return allDominos;
 	}
 	

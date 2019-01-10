@@ -6,6 +6,8 @@ public class DominAtions {
 		// TODO Auto-generated method stub
 		Menu menu = new Menu();
 		Game partie = new Game(menu.nbrJoueur);
+		partie.begin();
+		//partie.endGame();
 	}
 
 }

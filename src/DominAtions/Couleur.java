@@ -11,6 +11,14 @@ public enum Couleur {
 	private Color c;
 
 	Couleur(String c){
-		this.c = Color.decode(c);
+		this.setC(Color.decode(c));
+	}
+
+	public Color getC() {
+		return c;
+	}
+
+	public void setC(Color c) {
+		this.c = c;
 	}
 }

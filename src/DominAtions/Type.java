@@ -7,6 +7,6 @@ public enum Type {
 	Montagne,
 	Mine,
 	Prairie,
-	Mer;
-
+	Mer,
+	Chateau;
 }

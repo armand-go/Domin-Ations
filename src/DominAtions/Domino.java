@@ -1,6 +1,6 @@
 package DominAtions;
 
-public class Domino {
+public class Domino implements Comparable<Domino> {
 	
 	int nbCouronnes1;
 	int nbCouronnes2;
@@ -22,4 +22,15 @@ public class Domino {
 	public void print() {
 		System.out.println(this.numero + ":" + this.nbCouronnes1 + "|" + this.terrain1.type + "|" + this.nbCouronnes2 + "|" + this.terrain2.type);
 	}
+	
+	public int getNum() {
+		return this.numero;
+	}
+
+	@Override
+	public int compareTo(Domino dom) {
+		int compareNum = ((Domino) dom).getNum(); 
+		return this.numero - compareNum;
+	}
+
 }
