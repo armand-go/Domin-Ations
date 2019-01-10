@@ -8,6 +8,7 @@ public class Domino implements Comparable<Domino> {
 	Terrain terrain2;
 	int numero;
 	
+	Orientation sens;
 	
 	public Domino(Terrain[] terrains, int[] couronnes, int numero) {
 		
@@ -16,6 +17,8 @@ public class Domino implements Comparable<Domino> {
 		this.terrain1 = terrains[0];
 		this.terrain2 = terrains[1];
 		this.numero = numero;
+		
+		this.sens = Orientation.RIGHT;
 		
 	}
 	

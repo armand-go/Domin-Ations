@@ -36,4 +36,17 @@ public class Terrain {
 			}
 		}
 	}
+	
+	public void print() {
+		Type type = this.getType();
+		if(type == Type.Mine) {
+			System.out.print("Mi");
+		} else if (type == Type.Montagne) {
+			System.out.print("Mo");
+		} else if (type == Type.Chateau){
+			System.out.print("^^");
+		} else {
+			System.out.print(type.toString().substring(0, 1));
+		} 
+	}
 }

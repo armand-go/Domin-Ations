@@ -1,17 +1,54 @@
 package DominAtions;
 
-import java.util.Scanner; 
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.Scanner;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Menu {
 
 	int nbrJoueur;
 	
 	public Menu() {
-		this.nbrJoueur = this.choixNbJoueur();
+		//this.nbrJoueur = this.choixNbJoueur();
 	}
 	
 	public void show() {
-		// TODO : Interface Graphique
+	    JFrame fenetre = new JFrame();
+	    fenetre.setTitle("Domi'Nations");
+	    fenetre.setSize(400, 100);
+	    fenetre.setLocationRelativeTo(null);
+	    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+	    
+	    fenetre.setLayout(new GridBagLayout());
+	    GridBagConstraints c = new GridBagConstraints();
+	    c.ipadx = -2;
+	    c.ipady = -2;
+	    
+	    c.gridx = 1;
+	    c.gridy = 0;
+	    fenetre.add(new JLabel("Domi'Nations"), c);
+	    
+		JButton button2, button3, button4;
+		button2 = new JButton("2 Joueurs");
+		button3 = new JButton("3 Joueurs");
+		button4 = new JButton("4 Joueurs");
+		
+	    c.gridx = 0;
+	    c.gridy = 1;
+	    fenetre.add(button2, c);
+	    c.gridx = 1;
+	    c.gridy = 1;
+	    fenetre.add(button3, c);
+	    c.gridx = 2;
+	    c.gridy = 1;
+	    fenetre.add(button4, c);
+	    
+	    fenetre.setVisible(true);
 	}
 	
 	public int choixNbJoueur() {

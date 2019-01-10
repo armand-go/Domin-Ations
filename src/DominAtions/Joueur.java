@@ -23,6 +23,17 @@ public class Joueur {
 	}
 	
 	public void placerDomino() {
+		Domino currentDomino = this.dominos.get(0);
+		
+		System.out.println(this.name + ", voici votre royaume :");
+		this.royaume.printRoyaume();
+		System.out.println("\nOù voulez-vous placer votre domino ? (Coordonnées de 0 à max) \n");
+		currentDomino.print();
+		Scanner sc = new Scanner(System.in);
+		int x = sc.nextInt();
+		int y = sc.nextInt();
+		
+		
 		
 	}
 	
