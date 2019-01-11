@@ -99,9 +99,9 @@ public class Game {
 		}
 
 		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos, this.fenetre);
-		while( (this.listDominos.size() != 0) ? true : false) {
+		/*while( (this.listDominos.size() != 0) ? true : false) {
 			turn.newTurn();
-		}
+		}*/
 	}
 	
 	
@@ -116,7 +116,6 @@ public class Game {
 		for(int i = 0; i < this.nbrJoueur; i++) {
 			String name = this.texts.get("nom" + i).getText();
 			this.joueurs[i] = new Joueur(name, nbRois, i);
-			System.out.println("Joueur Créé");
 		}
 		
 		this.begin();

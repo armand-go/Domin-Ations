@@ -1,5 +1,10 @@
 package DominAtions;
 
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -32,18 +37,37 @@ public class Joueur {
 		Scanner sc = new Scanner(System.in);
 		int x = sc.nextInt();
 		int y = sc.nextInt();
-		
-		
-		
 	}
 	
-	public int choisirDomino(ArrayList<Domino> pioche, Joueur[] domC) {
-		for(int i = 0; i < pioche.size(); i++) {
-			pioche.get(i).print();
-			if(domC[i] != null) {
-				System.out.println("^^^Deja Pris^^^");
+
+	
+	
+	public int choisirDomino(ArrayList<Domino> pioche, Joueur[] domC, GameScreen screen) {
+		screen.repaint();
+		
+		class ClicPioche implements MouseListener{
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
 			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+
+			
 		}
+		
+		
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println(this.name + ", quel domino voulez-vous ? (Entrez index domino (0-max) ):");

@@ -1,5 +1,8 @@
 package DominAtions;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Terrain {
 
 	Type type;
@@ -35,6 +38,26 @@ public class Terrain {
 				this.type = tipe;
 			}
 		}
+	}
+	
+	public void draw(Graphics g, int x, int y) {
+		if(this.type == Type.Champs) {
+			g.setColor(Color.decode("#EDFE01"));
+		} else if (this.type == Type.Foret) {
+			g.setColor(Color.decode("#005E13"));
+		} else if (this.type == Type.Mer) {
+			g.setColor(Color.decode("#010C9D"));
+		} else if (this.type == Type.Mine) {
+			g.setColor(Color.decode("#494842"));
+		} else if (this.type == Type.Montagne) {
+			g.setColor(Color.decode("#796902"));
+		} else if (this.type == Type.Prairie) {
+			g.setColor(Color.decode("#01FE55"));
+		} else { // Type.VIDE
+			g.setColor(Color.decode("#D2D2D2"));
+		}
+		
+		g.fillRect(x, y, 50, 50);
 	}
 	
 	public void print() {

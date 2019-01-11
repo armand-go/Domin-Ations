@@ -1,9 +1,14 @@
 package DominAtions;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Tour {
 
@@ -12,10 +17,18 @@ public class Tour {
 	ArrayList<Domino> listDominos;
 	
 	Joueur[] ordreJoueurs;
+	Joueur[] dominoChoisi;
 	ArrayList<Domino> pioche;
 	ArrayList<Domino> pioche2;
 	
 	JFrame fenetre;
+	GameScreen screen;
+	
+	
+	//Booléens pour la partie graphique
+	boolean boolPioche;
+	boolean boolPioche2;
+	boolean boolRois;
 	
 	public Tour(int nbD, Joueur[] j, ArrayList<Domino> dominos, JFrame fen) {
 		
@@ -28,7 +41,26 @@ public class Tour {
 		this.pioche2 = this.piocher();
 		this.fenetre = fen;
 		
+		this.initFrame();
 		this.firstTurn();
+	}
+	
+	public void initFrame() {
+		this.fenetre.getContentPane().removeAll();
+		this.fenetre.repaint();
+		
+		this.fenetre.setSize(800, 600); 
+		//this.fenetre.setResizable(false);
+		this.fenetre.setLayout(new GridBagLayout());
+		
+		this.screen = new GameScreen(this);
+		
+		this.fenetre.setContentPane(this.screen);
+		this.fenetre.setVisible(true);
+		
+		
+		this.boolPioche = true;
+		this.screen.repaint();
 	}
 	
 	public Joueur[] firstOrder() {
@@ -46,16 +78,17 @@ public class Tour {
 	}
 	
 	public void firstTurn() {
-		Joueur[] dominoChoisi = new Joueur[this.pioche.size()];
+		this.dominoChoisi = new Joueur[this.pioche.size()];
 		for(int i = 0; i < dominoChoisi.length; i++) {
-			dominoChoisi[i] = null;
+			this.dominoChoisi[i] = null;
 		}
 		
 		for(int i = 0; i < this.ordreJoueurs.length; i++) {
-			dominoChoisi[this.ordreJoueurs[i].choisirDomino(this.pioche, dominoChoisi)] = this.ordreJoueurs[i];
+			this.dominoChoisi[this.ordreJoueurs[i].choisirDomino(this.pioche, dominoChoisi, this.screen)] = this.ordreJoueurs[i];
+			this.boolRois = true;
 		}
 		
-		this.ordreJoueurs = dominoChoisi;
+		this.ordreJoueurs = this.dominoChoisi;
 	}
 	
 	public void newTurn() {
@@ -65,7 +98,7 @@ public class Tour {
 		}
 		
 		for(int i = 0; i < this.ordreJoueurs.length; i++) {
-			dominoChoisi[this.ordreJoueurs[i].choisirDomino(this.pioche2, dominoChoisi)] = this.ordreJoueurs[i];
+			dominoChoisi[this.ordreJoueurs[i].choisirDomino(this.pioche2, dominoChoisi, this.screen)] = this.ordreJoueurs[i];
 			this.ordreJoueurs[i].placerDomino();
 		}
 		
