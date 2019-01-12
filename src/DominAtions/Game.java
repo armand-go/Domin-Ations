@@ -12,14 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import DominAtions.Menu.buttonChoix;
 
 public class Game {
 	
@@ -98,7 +96,9 @@ public class Game {
 			nbDom = 4;
 		}
 
-		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos, this.fenetre);
+		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos, this.fenetre, this);
+		turn.firstTurn();
+		
 		/*while( (this.listDominos.size() != 0) ? true : false) {
 			turn.newTurn();
 		}*/

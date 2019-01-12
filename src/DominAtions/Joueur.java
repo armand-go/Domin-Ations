@@ -18,6 +18,7 @@ public class Joueur {
 	public boolean[] rois;
 	public ArrayList<Domino> dominos;
 
+	
 	public Joueur(String name, int nbRoi, int col) {
 		this.score = 0;
 		this.name = name;
@@ -39,49 +40,6 @@ public class Joueur {
 		int y = sc.nextInt();
 	}
 	
-
-	
-	
-	public int choisirDomino(ArrayList<Domino> pioche, Joueur[] domC, GameScreen screen) {
-		screen.repaint();
-		
-		class ClicPioche implements MouseListener{
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
-
-			
-		}
-		
-		
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println(this.name + ", quel domino voulez-vous ? (Entrez index domino (0-max) ):");
-		int index = sc.nextInt();
-		
-		while(domC[index] != null) {
-			System.out.println("Ce domino a déjà été pris");
-			index = sc.nextInt();
-		}
-
-		this.dominos.add(pioche.get(index));
-		Collections.sort(this.dominos); // S'il y a 2 rois par joueur
-		return index;
-	}
 	
 	public int getScore() {
 		return this.score;

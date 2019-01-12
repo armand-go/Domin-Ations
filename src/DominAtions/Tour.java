@@ -1,14 +1,12 @@
 package DominAtions;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Tour {
 
@@ -23,6 +21,7 @@ public class Tour {
 	
 	JFrame fenetre;
 	GameScreen screen;
+	Game game;
 	
 	
 	//Booléens pour la partie graphique
@@ -30,7 +29,7 @@ public class Tour {
 	boolean boolPioche2;
 	boolean boolRois;
 	
-	public Tour(int nbD, Joueur[] j, ArrayList<Domino> dominos, JFrame fen) {
+	public Tour(int nbD, Joueur[] j, ArrayList<Domino> dominos, JFrame fen, Game g) {
 		
 		this.nbDomino = nbD;
 		this.joueurs = j;
@@ -40,9 +39,9 @@ public class Tour {
 		this.pioche = this.piocher();
 		this.pioche2 = this.piocher();
 		this.fenetre = fen;
+		this.game = g;
 		
 		this.initFrame();
-		this.firstTurn();
 	}
 	
 	public void initFrame() {
@@ -58,9 +57,7 @@ public class Tour {
 		this.fenetre.setContentPane(this.screen);
 		this.fenetre.setVisible(true);
 		
-		
-		this.boolPioche = true;
-		this.screen.repaint();
+		this.screen.paintPioche();
 	}
 	
 	public Joueur[] firstOrder() {
@@ -72,9 +69,89 @@ public class Tour {
 		}
 		
 		Collections.shuffle(ordre);
+
 		Joueur[] ordreArray = new Joueur[ordre.size()];
 		ordreArray = ordre.toArray(ordreArray);
 		return ordreArray;
+	}
+	
+	public class ClicPioche implements MouseListener{
+		Tour turn;
+		
+		int i;
+		
+		public ClicPioche(Tour t, int indexJoueur) {
+			this.turn = t;
+			this.i = indexJoueur;
+		}
+		
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			Joueur j = this.turn.ordreJoueurs[this.i];
+			
+			if(30 < e.getX() && 130 > e.getX() && 30 < e.getY() && 80 > e.getY() && this.turn.dominoChoisi[0] == null) {
+				System.out.println(j.name + ", vous avez selectionné le domino 1");
+				j.dominos.add(this.turn.pioche.get(0));
+				this.turn.boolRois = true;
+				this.turn.dominoChoisi[0] = j;
+				this.turn.screen.repaint();
+				
+				if(this.i < this.turn.ordreJoueurs.length - 1) {
+					j = this.turn.ordreJoueurs[this.i++];
+				}  else {
+					this.turn.secondPiocheFirstTurn(this);
+				}
+				
+			} else if (30 < e.getX() && 130 > e.getX() && 90 < e.getY() && 130 > e.getY() && this.turn.dominoChoisi[1] == null){
+				System.out.println(j.name + ", vous avez selectionné le domino 2");
+				j.dominos.add(this.turn.pioche.get(1));
+				this.turn.boolRois = true;
+				this.turn.dominoChoisi[1] = j;
+				this.turn.screen.repaint();
+				
+				if(this.i < this.turn.ordreJoueurs.length - 1) {
+					j = this.turn.ordreJoueurs[this.i++];
+				}  else {
+					this.turn.secondPiocheFirstTurn(this);
+				}
+				
+			} else if (30 < e.getX() && 130 > e.getX() && 150 < e.getY() && 180 > e.getY() && this.turn.dominoChoisi[2] == null){
+				System.out.println(j.name + ", vous avez selectionné le domino 3");
+				j.dominos.add(this.turn.pioche.get(2));
+				this.turn.boolRois = true;
+				this.turn.dominoChoisi[2] = j;
+				this.turn.screen.repaint();
+				
+				if(this.i < this.turn.ordreJoueurs.length - 1) {
+					j = this.turn.ordreJoueurs[this.i++];
+				}  else {
+					this.turn.secondPiocheFirstTurn(this);
+				}
+				
+			} if(this.turn.pioche.size() == 4) {
+				if (30 < e.getX() && 130 > e.getX() && 210 < e.getY() && 230 > e.getY() && this.turn.dominoChoisi[3] == null){
+					System.out.println(j.name + ", vous avez selectionné le domino 4");
+					j.dominos.add(this.turn.pioche.get(3));
+					this.turn.boolRois = true;
+					this.turn.dominoChoisi[3] = j;
+					this.turn.screen.repaint();
+					
+					if(this.i < this.turn.ordreJoueurs.length - 1) {
+						j = this.turn.ordreJoueurs[this.i++];
+					} else {
+						this.turn.secondPiocheFirstTurn(this);
+					}
+				}
+			}
+		}
+		@Override
+		public void mousePressed(MouseEvent e) {}
+		@Override
+		public void mouseReleased(MouseEvent e) {}
+		@Override
+		public void mouseEntered(MouseEvent e) {}
+		@Override
+		public void mouseExited(MouseEvent e) {}
 	}
 	
 	public void firstTurn() {
@@ -83,12 +160,13 @@ public class Tour {
 			this.dominoChoisi[i] = null;
 		}
 		
-		for(int i = 0; i < this.ordreJoueurs.length; i++) {
-			this.dominoChoisi[this.ordreJoueurs[i].choisirDomino(this.pioche, dominoChoisi, this.screen)] = this.ordreJoueurs[i];
-			this.boolRois = true;
-		}
+		ClicPioche clic = new ClicPioche(this, 0);
+		this.screen.addMouseListener(clic);
+	}
+	
+	public void secondPiocheFirstTurn(ClicPioche clic){
+		this.screen.removeMouseListener(clic);
 		
-		this.ordreJoueurs = this.dominoChoisi;
 	}
 	
 	public void newTurn() {
@@ -98,7 +176,7 @@ public class Tour {
 		}
 		
 		for(int i = 0; i < this.ordreJoueurs.length; i++) {
-			dominoChoisi[this.ordreJoueurs[i].choisirDomino(this.pioche2, dominoChoisi, this.screen)] = this.ordreJoueurs[i];
+			//dominoChoisi[this.ordreJoueurs[i].choisirFirstDomino(this.pioche2, dominoChoisi, this)] = this.ordreJoueurs[i];
 			this.ordreJoueurs[i].placerDomino();
 		}
 		

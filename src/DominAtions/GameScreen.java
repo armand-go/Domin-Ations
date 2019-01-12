@@ -2,16 +2,15 @@ package DominAtions;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JPanel;
 
 public class GameScreen extends JPanel {
 	
 	Tour turn;
-	Graphics g;
 	
 	public GameScreen(Tour t) {
 		super();
@@ -22,19 +21,23 @@ public class GameScreen extends JPanel {
 		this.setBackground(Color.decode("#ADCCDB"));
 		
 		if(this.turn.boolPioche) {
-			this.piocher(g, this.turn.pioche);
+			this.piocher(g);
 		}
 		if(this.turn.boolRois) {
-			this.rois(g, this.turn.dominoChoisi);
+			this.rois(g);
 		}
 	}  
 	
-	public void rois(Graphics g, Joueur[] dominoChoisi) {
-		for(int i = 0; i < dominoChoisi.length; i++) {
-			if(dominoChoisi[i] != null) {
-				g.setColor(dominoChoisi[i].getCouleur().getC());
-				g.fillOval(80, 55 + 60 * i, 10, 10);
-				g.fillRect(80, 55, 3, 10);
+	public void choisirDomino() {
+		
+	}
+	
+	public void rois(Graphics g) {
+		for(int i = 0; i < turn.dominoChoisi.length; i++) {
+			if(turn.dominoChoisi[i] != null) {
+				g.setColor(turn.dominoChoisi[i].getCouleur().getC());
+				g.fillOval(75, 55 + 60 * i, 10, 10);
+				g.fillRect(77, 60 + 60 * i, 7, 10);
 			}
 		}
 	}
@@ -43,8 +46,13 @@ public class GameScreen extends JPanel {
 		
 	}
 	
-	public void piocher(Graphics g, ArrayList<Domino> pioche) {
-		
+	public void paintPioche() {
+		this.turn.boolPioche = true;
+		this.repaint();
+	}
+	
+	public synchronized void piocher(Graphics g) {
+		ArrayList<Domino> pioche = this.turn.pioche;
 		/*Timer timer = new Timer();
 		timer.schedule( new TimerTask() {
 			
@@ -84,5 +92,4 @@ public class GameScreen extends JPanel {
 			pioche.get(i).paintShow(g, 30, 30 + 60 * i);
 		}
 	}
-	
 }
