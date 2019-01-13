@@ -62,7 +62,7 @@ public class Domino implements Comparable<Domino> {
 			this.terrain2.draw(g, x, y+50);
 			g.setColor(Color.YELLOW);
 			for(int i = 0; i < this.nbCouronnes1; i++) {g.fillOval(x+15*(i+1), y+5, 8, 8);}
-			for(int j = 0; j < this.nbCouronnes2; j++) {g.fillOval(x+15*(j+1), y+95, 8, 8);}
+			for(int j = 0; j < this.nbCouronnes2; j++) {g.fillOval(x+15*(j+1), y+85, 8, 8);}
 			g.setColor(Color.BLACK);
 			g.drawString(Integer.toString(this.nbCouronnes1), x+20, y+25);
 			g.drawString(Integer.toString(this.nbCouronnes2), x+20, y+100-25);
@@ -70,20 +70,20 @@ public class Domino implements Comparable<Domino> {
 			this.terrain1.draw(g, x, y);
 			this.terrain2.draw(g, x-50, y);
 			g.setColor(Color.YELLOW);
-			for(int i = 0; i < this.nbCouronnes1; i++) {g.fillOval(x-15*(i+1), y+5, 8, 8);}
-			for(int j = 0; j < this.nbCouronnes2; j++) {g.fillOval(x - 100 + 15*(j+1), y+5, 8, 8);}
+			for(int i = 0; i < this.nbCouronnes1; i++) {g.fillOval(x+15*(i+1), y+5, 8, 8);}
+			for(int j = 0; j < this.nbCouronnes2; j++) {g.fillOval(x - 50 + 15*(j+1), y+5, 8, 8);}
 			g.setColor(Color.BLACK);
-			g.drawString(Integer.toString(this.nbCouronnes1), x-20, y+25);
-			g.drawString(Integer.toString(this.nbCouronnes2), x-100+25, y+25);
+			g.drawString(Integer.toString(this.nbCouronnes1), x+20, y+25);
+			g.drawString(Integer.toString(this.nbCouronnes2), x-50+25, y+25);
 		} else if (this.sens == Orientation.TOP) {
 			this.terrain1.draw(g, x, y);
 			this.terrain2.draw(g, x, y-50);
 			g.setColor(Color.YELLOW);
-			for(int i = 0; i < this.nbCouronnes1; i++) {g.fillOval(x+15*(i+1), y-5, 8, 8);}
-			for(int j = 0; j < this.nbCouronnes2; j++) {g.fillOval(x+15*(j+1), y-95, 8, 8);}
+			for(int i = 0; i < this.nbCouronnes1; i++) {g.fillOval(x+15*(i+1), y+5, 8, 8);}
+			for(int j = 0; j < this.nbCouronnes2; j++) {g.fillOval(x+15*(j+1), y-45, 8, 8);}
 			g.setColor(Color.BLACK);
-			g.drawString(Integer.toString(this.nbCouronnes1), x+20, y-25);
-			g.drawString(Integer.toString(this.nbCouronnes2), x+20, y-100+25);
+			g.drawString(Integer.toString(this.nbCouronnes1), x+20, y+25);
+			g.drawString(Integer.toString(this.nbCouronnes2), x+20, y-25);
 		}
 	}
 	

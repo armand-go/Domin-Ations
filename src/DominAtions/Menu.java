@@ -28,6 +28,7 @@ public class Menu {
 	    this.fenetre.setSize(400, 100);
 	    this.fenetre.setLocationRelativeTo(null);
 	    this.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+	    this.fenetre.setFocusable(true);
 	    
 	    this.fenetre.setLayout(new GridBagLayout());
 	    GridBagConstraints c = new GridBagConstraints();

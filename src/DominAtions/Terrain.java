@@ -67,6 +67,14 @@ public class Terrain {
 		}
 		
 		g.fillRect(x, y, 50, 50);
+		g.setColor(Color.black);
+		g.drawLine(x, y, x, y+50);
+		g.drawLine(x, y, x+50, y);
+		g.drawLine(x+50, y, x+50, y+50);
+		g.drawLine(x, y+50, x+50, y+50);
+		
+		if(this.nbCouronne != 0)
+			g.drawString("" + this.nbCouronne, x + 25, y + 25);
 	}
 	
 	public void print() {
