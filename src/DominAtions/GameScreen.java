@@ -31,12 +31,12 @@ public class GameScreen extends JPanel {
 		if(this.turn.boolPioche) {
 			g.setColor(Color.BLACK);
 			this.piocher(g, 30, 30, this.turn.pioche);
-		} if(this.turn.boolRois) {
-			this.rois(g, 75);
-		} if(this.turn.boolRois2) {
-			this.rois(g, 200);
 		} if(this.turn.boolPioche2) {
 			this.piocher(g, 150, 30, this.turn.pioche2);
+		} if(this.turn.boolRois) {
+			this.rois(g, 75, this.turn.dominoChoisi);
+		} if(this.turn.boolRois2) {
+			this.rois(g, 150, this.turn.dominoChoisi2);
 		} if(this.turn.play) {
 			this.royaume(g);
 		} if(this.turn.dominoDrag != null) {
@@ -88,10 +88,10 @@ public class GameScreen extends JPanel {
 		}
 	}
 	
-	public void rois(Graphics g, int x) {
-		for(int i = 0; i < turn.dominoChoisi.length; i++) {
-			if(turn.dominoChoisi[i] != null) {
-				g.setColor(turn.dominoChoisi[i].getCouleur().getC());
+	public void rois(Graphics g, int x, Joueur[] dom) {
+		for(int i = 0; i < dom.length; i++) {
+			if(dom[i] != null) {
+				g.setColor(dom[i].getCouleur().getC());
 				g.fillOval(x, 55 + 60 * i, 10, 10);
 				g.fillRect(x+2, 60 + 60 * i, 7, 10);
 			}

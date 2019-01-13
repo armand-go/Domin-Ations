@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.swing.JFrame;
@@ -193,16 +194,10 @@ public class Tour {
 	    this.fenetre.setLocationRelativeTo(null);
 		this.ordreJoueurs = this.dominoChoisi;
 		
-		this.dominoChoisi2 = new Joueur[this.pioche.size()];
-		for(int i = 0; i < this.dominoChoisi2.length; i++) {
-			dominoChoisi2[i] = null;
-		}
-		
 		this.playerTurn = this.ordreJoueurs[0];
 		this.boolPioche2 = true;
 		this.newTurn();
 	}
-	
 	
 	public class ClicChoixDominoJoueur extends MouseInputAdapter {
 		Tour t;
@@ -331,16 +326,17 @@ public class Tour {
 			this.turn = t;
 			this.joueur = joueur;
 			this.indexJoueur = indexJoueur;
+
 		}
 		
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if(150 < e.getX() && 150+100 > e.getX() && 30 < e.getY() && 80 > e.getY() && this.turn.dominoChoisi2[0] == null) {
 				//System.out.println(j.name + ", vous avez selectionné le domino 1");
-				this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche.get(0));;
+				this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche2.get(0));;
 				this.turn.boolRois2 = true;
 				this.turn.dominoChoisi[indexJoueur] = null;
-				this.turn.dominoChoisi2[indexJoueur] = this.joueur;
+				this.turn.dominoChoisi2[0] = this.turn.playerTurn;
 				this.turn.screen.repaint();
 				
 				if(this.indexJoueur < this.turn.ordreJoueurs.length - 1) {
@@ -357,19 +353,27 @@ public class Tour {
 					this.turn.pioche2 = this.turn.piocher();
 					this.turn.boolRois2 = false;
 					this.turn.ordreJoueurs = this.turn.dominoChoisi2;
+					this.turn.dominoChoisi = this.turn.ordreJoueurs;
+					this.turn.playerTurn = this.turn.ordreJoueurs[0];
+					
+					this.turn.screen.repaint();
+					
+					this.turn.remove(this, this.turn.dominoChoisi2);
 				}
 				
 			} else if (150 < e.getX() && 150+100 > e.getX() && 90 < e.getY() && 140 > e.getY() && this.turn.dominoChoisi2[1] == null){
 				//System.out.println(j.name + ", vous avez selectionné le domino 2");
-				this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche.get(1));;
+				this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche2.get(1));;
 				this.turn.boolRois2 = true;
 				this.turn.dominoChoisi[indexJoueur] = null;
-				this.turn.dominoChoisi2[indexJoueur] = this.joueur;
+				this.turn.dominoChoisi2[1] = this.turn.playerTurn;
 				this.turn.screen.repaint();
 				
 				if(this.indexJoueur < this.turn.ordreJoueurs.length - 1) {
 					this.indexJoueur++;
 					this.turn.playerTurn = this.turn.ordreJoueurs[this.indexJoueur];
+					this.turn.boolTextPioche = false;
+					this.turn.boolTextJeu = true;
 					ClicChoixDominoJoueur clic = new ClicChoixDominoJoueur(this.turn);
 					this.turn.screen.addMouseListener(clic);
 					this.turn.screen.addMouseMotionListener(clic);
@@ -378,19 +382,28 @@ public class Tour {
 					this.turn.pioche2 = this.turn.piocher();
 					this.turn.boolRois2 = false;
 					this.turn.ordreJoueurs = this.turn.dominoChoisi2;
+					this.turn.dominoChoisi = this.turn.ordreJoueurs;
+					this.turn.playerTurn = this.turn.ordreJoueurs[0];
+					
+					
+					this.turn.screen.repaint();
+					
+					this.turn.remove(this, this.turn.dominoChoisi2);
 				}
 				
 			} else if (150 < e.getX() && 150+100 > e.getX() && 150 < e.getY() && 200 > e.getY() && this.turn.dominoChoisi2[2] == null){
 				//System.out.println(j.name + ", vous avez selectionné le domino 3");
-				this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche.get(2));;
+				this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche2.get(2));;
 				this.turn.boolRois2 = true;
 				this.turn.dominoChoisi[indexJoueur] = null;
-				this.turn.dominoChoisi2[indexJoueur] = this.joueur;
+				this.turn.dominoChoisi2[2] = this.turn.playerTurn;
 				this.turn.screen.repaint();
 				
 				if(this.indexJoueur < this.turn.ordreJoueurs.length - 1) {
 					this.indexJoueur++;
 					this.turn.playerTurn = this.turn.ordreJoueurs[this.indexJoueur];
+					this.turn.boolTextPioche = false;
+					this.turn.boolTextJeu = true;
 					ClicChoixDominoJoueur clic = new ClicChoixDominoJoueur(this.turn);
 					this.turn.screen.addMouseListener(clic);
 					this.turn.screen.addMouseMotionListener(clic);
@@ -399,20 +412,29 @@ public class Tour {
 					this.turn.pioche2 = this.turn.piocher();
 					this.turn.boolRois2 = false;
 					this.turn.ordreJoueurs = this.turn.dominoChoisi2;
+					this.turn.dominoChoisi = this.turn.ordreJoueurs;
+					this.turn.playerTurn = this.turn.ordreJoueurs[0];
+					
+					
+					this.turn.screen.repaint();
+					
+					this.turn.remove(this, this.turn.dominoChoisi2);
 				}
 				
 			} if(this.turn.pioche.size() == 4) {
 				if (150 < e.getX() && 150+100 > e.getX() && 210 < e.getY() && 280 > e.getY() && this.turn.dominoChoisi2[3] == null){
 					//System.out.println(j.name + ", vous avez selectionné le domino 4");
-					this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche.get(3));;
+					this.turn.playerTurn.dominos.add(turn.playerTurn.dominos.size(), this.turn.pioche2.get(3));;
 					this.turn.boolRois2 = true;
 					this.turn.dominoChoisi[indexJoueur] = null;
-					this.turn.dominoChoisi2[indexJoueur] = this.joueur;
+					this.turn.dominoChoisi2[3] = this.turn.playerTurn;
 					this.turn.screen.repaint();
 					
 					if(this.indexJoueur < this.turn.ordreJoueurs.length - 1) {
 						this.indexJoueur++;
 						this.turn.playerTurn = this.turn.ordreJoueurs[this.indexJoueur];
+						this.turn.boolTextPioche = false;
+						this.turn.boolTextJeu = true;
 						ClicChoixDominoJoueur clic = new ClicChoixDominoJoueur(this.turn);
 						this.turn.screen.addMouseListener(clic);
 						this.turn.screen.addMouseMotionListener(clic);
@@ -420,7 +442,10 @@ public class Tour {
 						this.turn.pioche = this.turn.pioche2;
 						this.turn.pioche2 = this.turn.piocher();
 						this.turn.boolRois2 = false;
-						this.turn.ordreJoueurs = this.turn.dominoChoisi2;
+						
+						this.turn.screen.repaint();
+						
+						this.turn.remove(this, this.turn.dominoChoisi2);
 					}
 				}
 			}
@@ -435,10 +460,34 @@ public class Tour {
 		public void mouseExited(MouseEvent e) {}
 	}
 	
+	public void remove(ClicPioche1 clic, Joueur[] dominoChoisi2) {
+		this.screen.removeMouseListener(clic);
+		this.boolTextPioche = false;
+		
+		System.out.println(dominoChoisi2[0].name);
+		
+		for(int i = 0; i < dominoChoisi2.length; i++) {
+			Joueur e = dominoChoisi2[i];
+			Joueur temp = new Joueur(e.name, e.getNbRois(), e.numero, e.royaume, e.dominos);
+			this.ordreJoueurs[i] = temp;
+			this.dominoChoisi[i] = temp;
+		}
+		
+		this.playerTurn = this.ordreJoueurs[0];
+		
+		this.newTurn();
+	}
+	
 	public void newTurn() {
 		this.play = true;
+		this.boolTextJeu = true;
 		this.boolListDom = true;
 		this.screen.repaint();
+		
+		this.dominoChoisi2 = new Joueur[this.pioche.size()];
+		for(int i = 0; i < this.dominoChoisi2.length; i++) {
+			this.dominoChoisi2[i] = null;
+		}
 		
 		ClicChoixDominoJoueur clic = new ClicChoixDominoJoueur(this);
 		this.screen.addMouseListener(clic);

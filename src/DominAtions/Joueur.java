@@ -24,6 +24,16 @@ public class Joueur {
 		this.numero = i;
 	}
 	
+	public Joueur(String name, int nbRoi, int i, Royaume royaume, ArrayList<Domino> dom) {
+		this.score = 0;
+		this.name = name;
+		this.royaume = royaume;
+		this.rois = new boolean[nbRoi];
+		this.couleur = Couleur.values()[i];
+		this.dominos = dom;
+		this.numero = i;
+	}
+	
 	
 	public int getScore() {
 		return this.score;

@@ -58,16 +58,16 @@ public class Royaume {
 		
 		
 		if((x > 0) && (y < 9) && (y>0)) {
-			if( (this.terrain[x-1][y].type == terrain1 || this.terrain[x+1][y].type == terrain1 || this.terrain[x][y-1].type == terrain1
-					|| this.terrain[x-1][y].type == Type.Chateau || this.terrain[x+1][1].type == Type.Chateau || this.terrain[x][y-1].type == Type.Chateau)) {
+			if( (this.terrain[x-1][y].type == terrain1 || this.terrain[x+1][y].type == terrain1 || this.terrain[x][y+1].type == terrain1
+					|| this.terrain[x-1][y].type == Type.Chateau || this.terrain[x+1][y].type == Type.Chateau || this.terrain[x][y+1].type == Type.Chateau)) {
 				this.terrain[x][y] = new Terrain(terrain1.toString(), domino.nbCouronnes1);
 				this.terrain[x][y-1] = new Terrain(terrain2.toString(), domino.nbCouronnes2);
 				return true;
 			}
 		} 
 		//else if((x+2 < 9) && (x+1 < 9 && y+1<9) && (x+1<9 && y-1 > 0)){
-			if(this.terrain[x-1][y-1].type == terrain2 || this.terrain[x][y+2].type == terrain2 || this.terrain[x+1][y-1].type == terrain2
-					|| this.terrain[x-1][y-1].type == Type.Chateau || this.terrain[x][y+2].type == Type.Chateau || this.terrain[x+1][y-1].type == Type.Chateau) {
+			if(this.terrain[x-1][y-1].type == terrain2 || this.terrain[x][y-2].type == terrain2 || this.terrain[x+1][y-1].type == terrain2
+					|| this.terrain[x-1][y-1].type == Type.Chateau || this.terrain[x][y-2].type == Type.Chateau || this.terrain[x+1][y-1].type == Type.Chateau) {
 				this.terrain[x][y] = new Terrain(terrain1.toString(), domino.nbCouronnes1);
 				this.terrain[x][y-1] = new Terrain(terrain2.toString(), domino.nbCouronnes2);
 				return true;
