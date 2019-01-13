@@ -6,10 +6,17 @@ import java.awt.Graphics;
 public class Terrain {
 
 	Type type;
+	int nbCouronne = 0;
 	
 	public Terrain(String type) {
 		
 		this.type = this.getType(type);
+	}
+	
+	public Terrain(String type, int nC) {
+		
+		this.type = this.getType(type);
+		this.nbCouronne = nC;
 	}
 	
 	public Terrain() {
@@ -45,7 +52,9 @@ public class Terrain {
 			g.setColor(Color.decode("#EDFE01"));
 		} else if (this.type == Type.Foret) {
 			g.setColor(Color.decode("#005E13"));
-		} else if (this.type == Type.Mer) {
+		} else if (this.type == Type.Chateau) {
+			g.setColor(Color.decode("#010101"));
+		}else if (this.type == Type.Mer) {
 			g.setColor(Color.decode("#010C9D"));
 		} else if (this.type == Type.Mine) {
 			g.setColor(Color.decode("#494842"));

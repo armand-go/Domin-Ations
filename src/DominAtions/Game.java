@@ -36,7 +36,6 @@ public class Game {
 		
 		this.fenetre = fenetre;
 		
-		this.initFrame();
 	}
 	
 	public void initFrame() {
@@ -50,7 +49,7 @@ public class Game {
 	    c.ipadx = 0;
 	    c.ipady = 0;
 	    
-	    this.texts = new HashMap();
+	    this.texts = new HashMap<String, JTextField>();
 	    int i = 0;
 	    for(; i < this.nbrJoueur; i++) {
 	    		c.gridx = 0;
@@ -69,15 +68,15 @@ public class Game {
 	    JButton buttonSubmit;
 		buttonSubmit = new JButton("Valider");
 		this.fenetre.add(buttonSubmit, c);
-		buttonSubmit.addActionListener(new buttonSubmit(this));
+		buttonSubmit.addActionListener(new ButtonSubmit(this));
 		
 	}
 	
-	class buttonSubmit implements ActionListener {
+	class ButtonSubmit implements ActionListener {
 		
 		Game g;
 		
-		public buttonSubmit(Game g) {
+		public ButtonSubmit(Game g) {
 			super();
 			this.g = g;
 		}
@@ -98,10 +97,7 @@ public class Game {
 
 		Tour turn = new Tour(nbDom, this.joueurs, this.listDominos, this.fenetre, this);
 		turn.firstTurn();
-		
-		/*while( (this.listDominos.size() != 0) ? true : false) {
-			turn.newTurn();
-		}*/
+
 	}
 	
 	

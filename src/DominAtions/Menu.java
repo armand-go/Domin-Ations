@@ -75,6 +75,7 @@ public class Menu {
 			//System.out.println(this.menu.nbrJoueur);
 			
 			Game partie = new Game(this.menu.nbrJoueur, this.menu.fenetre);
+			partie.initFrame();
 		}
 	}
 
