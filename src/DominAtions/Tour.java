@@ -232,11 +232,12 @@ public class Tour {
 			
 			
 			if(this.selectedDomino != null) {
-				int Xbegin = (this.t.playerTurn.numero *(450 + 10));
+				int Xbegin = ((this.t.playerTurn.numero)%2 *(450 + 10));
+				int Ybegin = ((this.t.playerTurn.numero)/2 *(450 + 10));
 				
-				if(e.getX() > 280 + Xbegin && e.getX() < 730 + Xbegin && e.getY() > 30 && e.getY() < 480) {
+				if(e.getX() > 280 + Xbegin && e.getX() < 730 + Xbegin && e.getY() > 30 + Ybegin  && e.getY() < 940) {
 					int x = (e.getX()-280-Xbegin)/50;
-					int y = (e.getY() - 30)/50;
+					int y = (e.getY() - 30 - Ybegin)/50;
 					//System.out.println(x + "," + y);
 					boolean placer = false;
 					if(this.selectedDomino.sens == Orientation.RIGHT) {
