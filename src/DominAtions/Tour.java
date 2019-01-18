@@ -190,7 +190,7 @@ public class Tour {
 		this.screen.removeMouseListener(clic);
 		this.boolTextPioche = false;
 		this.boolTextJeu = true;
-		this.fenetre.setSize(280 + this.joueurs.length * 480, 550);
+		this.fenetre.setSize(280 + 2 * 480, 1000);
 	    this.fenetre.setLocationRelativeTo(null);
 		this.ordreJoueurs = this.dominoChoisi;
 		

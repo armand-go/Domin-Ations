@@ -71,8 +71,11 @@ public class GameScreen extends JPanel {
 	
 	public void royaume(Graphics g) {
 		int X = 280;
+		int Y = 30;
 		for(int i = 0; i < this.turn.joueurs.length; i++) {
-			int Y = 30;
+			if(i >= 2) {
+				Y = 500;
+			}
 			
 			Royaume royaume = this.turn.joueurs[i].royaume;
 			
@@ -85,6 +88,9 @@ public class GameScreen extends JPanel {
 			g.drawString("Royaume de " + this.turn.joueurs[i].name, X + 10, Y + 450 + 15);
 			
 			X+=460;
+			if(i == 1) {
+				X = 280;
+			}
 		}
 	}
 	
