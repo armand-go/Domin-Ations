@@ -14,7 +14,7 @@ public class Royaume {
 	public void initRoyaume() {
 		for(int x = 0; x < this.terrain.length; x++) {
 			for(int y = 0; y < this.terrain[x].length; y++) {
-				this.terrain[x][y] = new Terrain();
+				this.terrain[x][y] = new Terrain(x, y);
 			}
 		}
 		this.terrain[4][4].setType("Chateau");

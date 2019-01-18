@@ -233,10 +233,11 @@ public class Tour {
 			
 			if(this.selectedDomino != null) {
 				int Xbegin = (this.t.playerTurn.numero *(450 + 10));
+				
 				if(e.getX() > 280 + Xbegin && e.getX() < 730 + Xbegin && e.getY() > 30 && e.getY() < 480) {
 					int x = (e.getX()-280-Xbegin)/50;
 					int y = (e.getY() - 30)/50;
-					System.out.println(x + "," + y);
+					//System.out.println(x + "," + y);
 					boolean placer = false;
 					if(this.selectedDomino.sens == Orientation.RIGHT) {
 						placer = this.t.playerTurn.royaume.placerDominoDroite(this.selectedDomino, x, y);
@@ -471,6 +472,7 @@ public class Tour {
 			Joueur temp = new Joueur(e.name, e.getNbRois(), e.numero, e.royaume, e.dominos);
 			this.ordreJoueurs[i] = temp;
 			this.dominoChoisi[i] = temp;
+			dominoChoisi2[i] = null;
 		}
 		
 		this.playerTurn = this.ordreJoueurs[0];
@@ -496,7 +498,9 @@ public class Tour {
 		
 		//ClicPioche2 clic = new ClicPioche2(this, 0, 150);
 		//this.screen.addMouseListener(clic);
-	}
+	}	
+		
+	
 	
 	public ArrayList<Domino> piocher(){
 		ArrayList<Domino> pioche = new ArrayList<Domino>();

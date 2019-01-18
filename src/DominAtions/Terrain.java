@@ -7,6 +7,8 @@ public class Terrain {
 
 	Type type;
 	int nbCouronne = 0;
+	int X;
+	int Y;
 	
 	public Terrain(String type) {
 		
@@ -23,7 +25,11 @@ public class Terrain {
 		this.type = Type.VIDE;
 	}
 	
-	
+	public Terrain(int x, int y) {
+		this.type = Type.VIDE;
+		this.X = x;
+		this.Y = y;
+	}
 	
 	public Type getType(String type) {
 		

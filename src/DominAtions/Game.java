@@ -50,6 +50,7 @@ public class Game {
 	    c.ipady = 0;
 	    
 	    this.texts = new HashMap<String, JTextField>();
+	    
 	    int i = 0;
 	    for(; i < this.nbrJoueur; i++) {
 	    		c.gridx = 0;
@@ -182,4 +183,80 @@ public class Game {
 		return choixDomino(allDominos);
 	}
 
+
+	public void remplissagecase(Joueur j) {
+		Royaume royaume = j.royaume;
+		
+		for(int x=0; x < royaume.terrain.length; x++){
+			for(int y=0; y < royaume.terrain[y].length; y++){
+				j.listTer.add(royaume.terrain[x][y]);
+			}
+		}
+	}
+	
+	public java.util.ArrayList<Terrain> memeTerrain(Terrain ter){
+		ArrayList<Terrain> sameTer = new ArrayList<>();
+		if (ter.type == Type.Chateau) {
+			return null;
+		}
+		
+		Terrain caseA = new Terrain(ter.X, ter.Y-1);
+		Terrain caseB = new Terrain(ter.X, ter.Y+1);
+		Terrain caseC = new Terrain(ter.X-1, ter.Y);
+		Terrain caseD = new Terrain(ter.X+1, ter.Y);
+		
+		if(ter.type == caseA.type) {
+			sameTer.add(caseA);
+		}if(ter.type == caseB.type) {
+			sameTer.add(caseB);
+		}if(ter.type == caseC.type) {
+			sameTer.add(caseC);
+		}if(ter.type == caseD.type) {
+			sameTer.add(caseD);
+		}
+		
+		return sameTer;
+		
 }
+
+	public void delimiterzone(Joueur joueur) {
+		for(Terrain monTer : joueur.listTer) {
+			boolean isContained = false;
+			ArrayList<Terrain> liste = joueur.listZone;
+			if(liste.contains(monTer)) {
+				isContained = true;
+			}
+			
+			if(!isContained) {
+				for(Terrain terrains : memeTerrain(monTer)) {
+					joueur.listZone.add(terrains);
+				}
+			}
+		}
+		
+	}
+
+	public void scoreTotal(Joueur joueur) {
+		ArrayList<Integer> scoreZone = new ArrayList<>();
+		
+		
+		ArrayList<Terrain> list = joueur.listZone;
+			int nbrCouronneZone = 0;
+			int nbrCaseZone = 0;
+			
+			for(Terrain ter: list) {
+				nbrCaseZone++;
+				nbrCouronneZone += ter.nbCouronne;
+			}
+			int scoreinter=nbrCouronneZone*nbrCaseZone;
+			scoreZone.add(scoreinter);
+		
+		int scoreFinal = 0;
+		for(int score: scoreZone) {
+			scoreFinal+=score;
+		}
+		
+		joueur.setScore(scoreFinal);
+	}
+}
+

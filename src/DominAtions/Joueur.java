@@ -12,7 +12,8 @@ public class Joueur {
 	public boolean[] rois;
 	public ArrayList<Domino> dominos;
 	public int numero;
-
+	public ArrayList<Terrain> listZone;
+	public ArrayList<Terrain> listTer;
 	
 	public Joueur(String name, int nbRoi, int i) {
 		this.score = 0;
